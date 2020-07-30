@@ -1,10 +1,11 @@
 ---
 driver:
   name: ec2
-  aws_ssh_key_id: chef_demo_2x
-  region: us-west-2
-  security_group_ids: sg-089fa448ffb8a5903
-  subnet_id: subnet-0da543e3b6cb0f2ea
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR'] %>
+  region: <%= ENV['AWS_REGION'] %>
+  security_group_ids: 
+    - <%= ENV['AWS_SECURITY_GROUP_ID'] %>
+  subnet_id: <%= ENV['AWS_SUBNET_ID'] %>
   associate_public_ip: true
   instance_type: t2.micro
   tags:
@@ -21,7 +22,7 @@ driver:
 provisioner:
   name: chef_zero
   product_name: chef
-  product_version: 14.12.3
+  product_version: 15.12.22
   client_rb:
     chef_license: accept
 
@@ -33,7 +34,7 @@ platforms:
   - name: centos-6
     transport:
       username: centos
-      ssh_key: ~/.ssh/id_rsa
+      ssh_key: <%= ENV['AWS_KEYPAIR_FILE'] %>
     driver_config:
       user_data: ./kitchen_user_data
 
