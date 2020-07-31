@@ -31,7 +31,7 @@ verifier:
   reporter: documentation
 
 platforms:
-  - name: centos-6
+  - name: centos-7
     transport:
       username: centos
       ssh_key: <%= ENV['AWS_KEYPAIR_FILE'] %>
